@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Complaint Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+
+    .form-container {
+      max-width: 500px;
+      margin: auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>SCID Gombe Complaint Form</h2>
+    <form id="complaintForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required>
+    
+      <label for="contact">Contact (Phone or Email)</label>
+      <input type="text" id="contact" name="contact" required>
+    
+      <label for="category">Complaint Category</label>
+      <select id="category" name="category" required>
+        <option value="">--Select Category--</option>
+        <option value="theft">Theft</option>
+        <option value="assault">Assault</option>
+        <option value="fraud">Fraud</option>
+        <option value="Homicide">Homicide</option>
+        <option value="Robbery">Robbery</option>
+        <option value="Rape">Rape</option>
+        <option value="other">Other</option>
+      </select>
+    
+      <label for="description">Write down your complaint here</label>
+      <textarea id="description" name="description" rows="5" required></textarea>
+    
+      <label for="file">Attach File (optional)</label>
+      <input type="file" id="file" name="file">
+    
+      <button type="submit">Submit Complaint</button>
+    </form>
+    
+  </div>
+  <script>
+    document.getElementById('complaintForm')
+    .addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const formEl = e.target;
+    const formData = new FormData(formEl);
+
+    const button = formEl.querySelector('button');
+    button.disabled = true;
+    button.textContent = 'Submitting...';
+
+    const resp = await fetch('/api/complaints', {
+    method: 'POST',
+    body: formData
+    });
+
+    button.disabled = false;
+    button.textContent = 'Submit Complaint';
+
+    if (!resp.ok) {
+    alert('❌ Error submitting complaint.');
+    return;
+    }
+
+    // ✅ Redirect to success page
+    window.location.href = 'success.html';
+    });
+
+  </script>
+</body>
+</html>
+<!-- This is a simple HTML form for submitting complaints. It includes fields for the user's name, contact information, complaint category, description, and an optional file attachment. The form is styled with CSS for a clean and modern look. -->

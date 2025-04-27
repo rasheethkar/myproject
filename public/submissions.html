@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>View Submissions | SCID Gombe Portal</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      padding: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background: #0056b3;
+      color: #fff;
+    }
+    a.file-link {
+      color: #0056b3;
+      text-decoration: none;
+    }
+    a.file-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Submitted Complaints</h1>
+    <table id="complaintsTable">
+      <!-- Rows will be injected by JavaScript -->
+    </table>
+  </div>
+
+  <script>
+    async function loadComplaints() {
+      try {
+        const response = await fetch('/api/complaints');
+        const data = await response.json();
+        const table = document.getElementById('complaintsTable');
+
+        // Build header row
+        const header = table.insertRow();
+        ['ID', 'Name', 'Contact', 'Category', 'Description', 'File', 'Timestamp']
+          .forEach(text => {
+            const th = document.createElement('th');
+            th.textContent = text;
+            header.appendChild(th);
+          });
+
+        // Populate rows
+        data.forEach(item => {
+          const row = table.insertRow();
+          row.insertCell().textContent = item.id;
+          row.insertCell().textContent = item.name;
+          row.insertCell().textContent = item.contact;
+          row.insertCell().textContent = item.category;
+          row.insertCell().textContent = item.description;
+          const fileCell = row.insertCell();
+          if (item.filePath) {
+            const link = document.createElement('a');
+            link.href = item.filePath;
+            link.textContent = 'Download';
+            link.className = 'file-link';
+            fileCell.appendChild(link);
+          } else {
+            fileCell.textContent = '-';
+          }
+          row.insertCell().textContent = new Date(item.timestamp).toLocaleString();
+        });
+      } catch (err) {
+        console.error('Error loading complaints:', err);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadComplaints);
+  </script>
+</body>
+</html>
+<!-- This HTML file is designed to display a list of submitted complaints in a table format. 
+     It fetches data from an API endpoint and dynamically populates the table with the complaint details. 
+     The table includes columns for ID, Name, Contact, Category, Description, File (with download link), and Timestamp. -->
+<!-- The JavaScript function `loadComplaints` handles the fetching and rendering of the data.
+     The table is styled with basic CSS for better readability. 
+     The file download link is only shown if a file path is available for the complaint. -->

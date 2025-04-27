@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome | SCID Gombe Complaint Portal</title>
+  <style>
+    /* ─── GLOBAL ───────────────────────────────────────────────────────── */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('images/npf2.png');
+      background-attachment: fixed;
+      background-size: cover;
+      background-repeat: no-repeat;
+      color: #333;
+    }
+
+    /* ─── HEADER ───────────────────────────────────────────────────────── */
+    header {
+      background-color: #002852;
+      color: #fff;
+      padding: 10px 20px;
+      position: sticky; /* sticks to top on scroll */
+      top: 0;
+      z-index: 100;
+    }
+    .header-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .brand img {
+      height: 40px;
+      margin-right: 8px;
+    }
+    .main-nav a {
+      color: #fff;
+      margin-left: 20px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: opacity 0.2s;
+    }
+    .main-nav a:hover {
+      opacity: 0.8;
+    }
+
+    /* ─── MAIN CONTENT ─────────────────────────────────────────────────── */
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: calc(100vh - 60px); /* subtract header height */
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+      background: rgb(240, 204, 0);
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 400px;
+      height: 380px;
+    }
+    .logo {
+      width: 150px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 24px;
+      font-family: 'Trebuchet MS';
+      margin-bottom: 10px;
+      color: #080808;
+    }
+    p {
+      margin-bottom: 20px;
+      color: #070707;
+      font-family: 'Trebuchet MS';
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #002852;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #004494;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── HEADER START ─────────────────────────────────────────────────── -->
+  <header>
+    <div class="header-container">
+      <span class="brand">
+        <img src="images/npf_scid_gombe_logo.png" alt="SCID Gombe Logo" />
+        <span>SCID Gombe</span>
+      </span>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="complaint.html">Lodge Complaint</a>
+        <a href="submissions.html">View Submissions</a>
+      </nav>
+    </div>
+  </header>
+  <!-- ─── HEADER END ───────────────────────────────────────────────────── -->
+
+  <!-- ─── MAIN CONTENT START ────────────────────────────────────────────── -->
+  <main>
+    <div class="container">
+      <img src="images/npf_scid_gombe_logo.png" alt="Nigeria Police Force SCID Gombe Logo" class="logo"/>
+      <h1>Welcome to SCID Gombe Portal</h1>
+      <p><strong>Police is your Friend,</strong> <em>what's your complaint today?</em></p>
+      <a href="complaint.html" class="btn">Lodge a Complaint</a>
+    </div>
+  </main>
+  <!-- ─── MAIN CONTENT END ─────────────────────────────────────────────── -->
+
+</body>
+</html>
