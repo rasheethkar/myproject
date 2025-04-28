@@ -29,8 +29,8 @@ Technologies Used
 Setup Instructions
 1. Clone the Repository
 
-git clone https://github.com/your-username/scid-gombe-complaints.git
-cd scid-gombe-complaints
+git clone https://github.com/rasheethkar/myproject.git
+cd myproject
 
 2. Install Dependencies
 
