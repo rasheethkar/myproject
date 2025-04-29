@@ -69,8 +69,7 @@ Project Folder Structure
 
 Screenshots
 
-(You can insert screenshots later here, e.g., homepage, complaint form, submissions view.)
-Future Improvements
+
 
     Add email notifications after complaint submission
 
