@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Welcome | SCID Gombe Complaint Portal</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
   <style>
     /* ─── GLOBAL ───────────────────────────────────────────────────────── */
     body {
@@ -24,6 +28,8 @@
       position: sticky; /* sticks to top on scroll */
       top: 0;
       z-index: 100;
+      /* Add relative positioning for absolute child menu */
+      position: relative;
     }
     .header-container {
       max-width: 1000px;
@@ -42,25 +48,64 @@
       height: 40px;
       margin-right: 8px;
     }
-    .main-nav a {
+    /* Container for header icons */
+    .header-icons a {
       color: #fff;
       margin-left: 20px;
       text-decoration: none;
       font-size: 1rem;
       transition: opacity 0.2s;
     }
-    .main-nav a:hover {
+    .header-icons a:hover {
       opacity: 0.8;
     }
+    .header-icons i {
+      font-size: 20px;
+      cursor: pointer;
+    }
 
-    /* ─── MAIN CONTENT ─────────────────────────────────────────────────── */
+    /* ─── MOBILE NAVIGATION MENU (Initially Hidden) ────────────────── */
+    .mobile-nav {
+      display: none; /* Hidden by default */
+      position: absolute;
+      top: 100%; /* Position below the header */
+      right: 0;
+      background-color: #003a75; /* Slightly different background */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      border-radius: 0 0 5px 5px;
+      z-index: 99; /* Below header but above main content */
+      min-width: 180px; /* Give it some width */
+    }
+    .mobile-nav a {
+      display: block; /* Make links take full width */
+      color: #fff;
+      padding: 12px 20px;
+      text-decoration: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.1); /* Separator */
+      transition: background-color 0.2s;
+    }
+    .mobile-nav a:first-child {
+      border-top: none; /* No border for the first item */
+    }
+    .mobile-nav a:hover {
+      background-color: #004c9a; /* Hover effect */
+    }
+
+    /* Class added by JavaScript to show the menu */
+    .mobile-nav.active {
+      display: block;
+    }
+
+
+    /* ─── MAIN CONTENT (No change needed here) ──────────────────────── */
     main {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: calc(100vh - 60px); /* subtract header height */
+      min-height: calc(100vh - 60px);
+      padding: 40px 20px; /* Increased top padding */
+      box-sizing: border-box;
     }
-
     .container {
       text-align: center;
       padding: 20px;
@@ -68,23 +113,24 @@
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       max-width: 500px;
-      width: 400px;
-      height: 380px;
+      width: 90%;
     }
     .logo {
       width: 150px;
+      max-width: 100%;
+      height: auto;
       margin-bottom: 20px;
     }
     h1 {
       font-size: 24px;
-      font-family: 'Trebuchet MS';
+      font-family: 'Trebuchet MS', sans-serif;
       margin-bottom: 10px;
       color: #080808;
     }
     p {
       margin-bottom: 20px;
       color: #070707;
-      font-family: 'Trebuchet MS';
+      font-family: 'Trebuchet MS', sans-serif;
     }
     .btn {
       display: inline-block;
@@ -95,6 +141,8 @@
       border-radius: 5px;
       font-size: 16px;
       transition: background 0.3s;
+      border: none;
+      cursor: pointer;
     }
     .btn:hover {
       background: #004494;
@@ -103,32 +151,68 @@
 </head>
 <body>
 
-  <!-- ─── HEADER START ─────────────────────────────────────────────────── -->
   <header>
     <div class="header-container">
       <span class="brand">
         <img src="images/npf_scid_gombe_logo.png" alt="SCID Gombe Logo" />
         <span>SCID Gombe</span>
       </span>
-      <nav class="main-nav">
-        <a href="index.html">Home</a>
-        <a href="complaint.html">Lodge Complaint</a>
-        <a href="submissions.html">View Submissions</a>
+      <nav class="header-icons">
+        <a href="#"><i class="fas fa-search"></i></a>
+        <a href="#" id="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+          <i class="fas fa-bars"></i>
+        </a>
       </nav>
     </div>
+    <nav class="mobile-nav" id="mobile-menu" role="navigation" aria-labelledby="menu-toggle">
+      <a href="index.html">Home</a>
+      <a href="complaint.html">Lodge Complaint</a>
+      <a href="submissions.html">View Submissions</a>
+    </nav>
   </header>
-  <!-- ─── HEADER END ───────────────────────────────────────────────────── -->
-
-  <!-- ─── MAIN CONTENT START ────────────────────────────────────────────── -->
   <main>
     <div class="container">
       <img src="images/npf_scid_gombe_logo.png" alt="Nigeria Police Force SCID Gombe Logo" class="logo"/>
       <h1>Welcome to SCID Gombe Portal</h1>
-      <p><strong>Police is your Friend,</strong> <em>👇🏻write your complaint down below👇🏻</em></p>
+      <p><strong>Police is your Friend,</strong> <em>write your complaint&nbsp;<br>👇🏻below👇🏻</em></p>
       <a href="complaint.html" class="btn">Lodge a Complaint</a>
     </div>
   </main>
-  <!-- ─── MAIN CONTENT END ─────────────────────────────────────────────── -->
+  <script>
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      // Get references to the toggle button and the menu
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      // Check if both elements exist
+      if (menuToggle && mobileMenu) {
+        // Add click event listener to the toggle button
+        menuToggle.addEventListener('click', (event) => {
+          // Prevent default link behavior (scrolling to top/#)
+          event.preventDefault();
+
+          // Toggle the 'active' class on the mobile menu
+          mobileMenu.classList.toggle('active');
+
+          // Update ARIA attribute for accessibility
+          const isExpanded = mobileMenu.classList.contains('active');
+          menuToggle.setAttribute('aria-expanded', isExpanded);
+        });
+
+        // Optional: Close menu if clicking outside of it
+        document.addEventListener('click', (event) => {
+          // Check if the click was outside the menu AND outside the toggle button
+          if (!mobileMenu.contains(event.target) && !menuToggle.contains(event.target) && mobileMenu.classList.contains('active')) {
+              mobileMenu.classList.remove('active');
+              menuToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      } else {
+        console.error("Menu toggle button or mobile menu element not found!");
+      }
+    });
+  </script>
 
 </body>
 </html>
