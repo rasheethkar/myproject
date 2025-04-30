@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Welcome | SCID Gombe Complaint Portal</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
   <style>
     /* ─── GLOBAL ───────────────────────────────────────────────────────── */
     body {
@@ -42,7 +46,7 @@
       height: 40px;
       margin-right: 8px;
     }
-    .main-nav a {
+    .main-nav a { /* Styles apply to the icon links */
       color: #fff;
       margin-left: 20px;
       text-decoration: none;
@@ -52,13 +56,19 @@
     .main-nav a:hover {
       opacity: 0.8;
     }
+    .main-nav i { /* Style for the icons themselves */
+      font-size: 20px;
+      cursor: pointer;
+    }
 
     /* ─── MAIN CONTENT ─────────────────────────────────────────────────── */
     main {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: calc(100vh - 60px); /* subtract header height */
+      min-height: calc(100vh - 60px); /* Use min-height, subtract approx header height */
+      padding: 20px; /* Add some padding */
+      box-sizing: border-box; /* Include padding in height calculation */
     }
 
     .container {
@@ -68,23 +78,25 @@
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       max-width: 500px;
-      width: 400px;
-      height: 380px;
+      width: 90%; /* Use percentage for better responsiveness */
+      /* Removed fixed height */
     }
     .logo {
       width: 150px;
+      max-width: 100%; /* Ensure logo scales down */
+      height: auto; /* Maintain aspect ratio */
       margin-bottom: 20px;
     }
     h1 {
       font-size: 24px;
-      font-family: 'Trebuchet MS';
+      font-family: 'Trebuchet MS', sans-serif; /* Added fallback font */
       margin-bottom: 10px;
       color: #080808;
     }
     p {
       margin-bottom: 20px;
       color: #070707;
-      font-family: 'Trebuchet MS';
+      font-family: 'Trebuchet MS', sans-serif; /* Added fallback font */
     }
     .btn {
       display: inline-block;
@@ -95,6 +107,8 @@
       border-radius: 5px;
       font-size: 16px;
       transition: background 0.3s;
+      border: none; /* Good practice for button-like links */
+      cursor: pointer;
     }
     .btn:hover {
       background: #004494;
@@ -103,7 +117,6 @@
 </head>
 <body>
 
-  <!-- ─── HEADER START ─────────────────────────────────────────────────── -->
   <header>
     <div class="header-container">
       <span class="brand">
@@ -111,24 +124,18 @@
         <span>SCID Gombe</span>
       </span>
       <nav class="main-nav">
-        <a href="index.html">Home</a>
-        <a href="complaint.html">Lodge Complaint</a>
-        <a href="submissions.html">View Submissions</a>
+        <a href="#"><i class="fas fa-search"></i></a>
+        <a href="#"><i class="fas fa-bars"></i></a>
       </nav>
     </div>
   </header>
-  <!-- ─── HEADER END ───────────────────────────────────────────────────── -->
-
-  <!-- ─── MAIN CONTENT START ────────────────────────────────────────────── -->
   <main>
     <div class="container">
       <img src="images/npf_scid_gombe_logo.png" alt="Nigeria Police Force SCID Gombe Logo" class="logo"/>
       <h1>Welcome to SCID Gombe Portal</h1>
-      <p><strong>Police is your Friend,</strong> <em>write your complaint  <br>👇🏻below👇🏻</em></p>
+      <p><strong>Police is your Friend,</strong> <em>write your complaint&nbsp;<br>👇🏻below👇🏻</em></p>
       <a href="complaint.html" class="btn">Lodge a Complaint</a>
     </div>
   </main>
-  <!-- ─── MAIN CONTENT END ─────────────────────────────────────────────── -->
-
-</body>
+  </body>
 </html>
