@@ -1,7 +1,7 @@
 SCID Gombe Complaint Portal
 
 A web-based complaint management system for the Nigeria Police Force — State Criminal Investigation Department (SCID) Gombe.
-This platform allows citizens to lodge complaints easily, securely, and track submissions.
+This platform allows citizens to lodge complaints easily, securely.
 Features
 
     Beautiful Homepage with SCID Gombe branding and Nigerian Police logo
