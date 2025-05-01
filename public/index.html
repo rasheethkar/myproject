@@ -18,6 +18,10 @@
       background-size: cover;
       background-repeat: no-repeat;
       color: #333;
+      /* Ensure body can grow to at least viewport height if content is short */
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     /* ─── HEADER ───────────────────────────────────────────────────────── */
@@ -97,13 +101,14 @@
     }
 
 
-    /* ─── MAIN CONTENT (No change needed here) ──────────────────────── */
+    /* ─── MAIN CONTENT ──────────────────────────────────────────────── */
     main {
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: calc(100vh - 60px);
-      padding: 40px 20px; /* Increased top padding */
+      /* Let main content grow to fill available space */
+      flex-grow: 1;
+      padding: 40px 20px;
       box-sizing: border-box;
     }
     .container {
@@ -112,7 +117,7 @@
       background: rgb(240, 204, 0);
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      max-width: 400px;
+      max-width: 400px; /* Reduced max-width slightly from original */
       width: 90%;
     }
     .logo {
@@ -127,7 +132,7 @@
       margin-bottom: 10px;
       color: #080808;
     }
-    p {
+    p { /* Style for paragraph inside .container */
       margin-bottom: 20px;
       color: #070707;
       font-family: 'Trebuchet MS', sans-serif;
@@ -147,6 +152,37 @@
     .btn:hover {
       background: #004494;
     }
+
+    /* ─── FOOTER ───────────────────────────────────────────────────────── */
+    footer {
+      background-color: #002852; /* Match header background */
+      color: #e0e0e0; /* Light grey text */
+      padding: 20px 20px;
+      text-align: center;
+      font-size: 0.9em;
+      /* No margin-top needed now with flexbox on body */
+      /* Ensure footer doesn't shrink */
+      flex-shrink: 0;
+    }
+
+    .footer-container {
+      max-width: 1000px; /* Match header container width */
+      margin: 0 auto; /* Center the content */
+    }
+
+    footer p { /* Style specifically for paragraph inside footer */
+      margin: 0; /* Remove default paragraph margin */
+    }
+
+    /* Optional: Style for links if you add any in the footer */
+    footer a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+
   </style>
 </head>
 <body>
@@ -170,6 +206,7 @@
       <a href="submissions.html">View Submissions</a>
     </nav>
   </header>
+
   <main>
     <div class="container">
       <img src="images/npf_scid_gombe_logo.png" alt="Nigeria Police Force SCID Gombe Logo" class="logo"/>
@@ -178,31 +215,28 @@
       <a href="complaint.html" class="btn">Lodge a Complaint</a>
     </div>
   </main>
+
+  <footer>
+    <div class="footer-container">
+      <p>&copy; <span id="current-year"></span> SCID Gombe Command, Nigeria Police Force. All Rights Reserved.</p>
+      </div>
+  </footer>
   <script>
     // Wait for the DOM to be fully loaded
     document.addEventListener('DOMContentLoaded', () => {
-      // Get references to the toggle button and the menu
+      // --- Menu Toggle Code ---
       const menuToggle = document.getElementById('menu-toggle');
       const mobileMenu = document.getElementById('mobile-menu');
 
-      // Check if both elements exist
       if (menuToggle && mobileMenu) {
-        // Add click event listener to the toggle button
         menuToggle.addEventListener('click', (event) => {
-          // Prevent default link behavior (scrolling to top/#)
           event.preventDefault();
-
-          // Toggle the 'active' class on the mobile menu
           mobileMenu.classList.toggle('active');
-
-          // Update ARIA attribute for accessibility
           const isExpanded = mobileMenu.classList.contains('active');
           menuToggle.setAttribute('aria-expanded', isExpanded);
         });
 
-        // Optional: Close menu if clicking outside of it
         document.addEventListener('click', (event) => {
-          // Check if the click was outside the menu AND outside the toggle button
           if (!mobileMenu.contains(event.target) && !menuToggle.contains(event.target) && mobileMenu.classList.contains('active')) {
               mobileMenu.classList.remove('active');
               menuToggle.setAttribute('aria-expanded', 'false');
@@ -211,8 +245,17 @@
       } else {
         console.error("Menu toggle button or mobile menu element not found!");
       }
+
+      // --- Footer Year Code ---
+      const yearSpan = document.getElementById('current-year');
+      if (yearSpan) {
+        // Get the current year (will be 2025 based on current context)
+        yearSpan.textContent = new Date().getFullYear();
+      } else {
+          console.error("Current year span element not found!");
+      }
+
     });
   </script>
-
 </body>
 </html>
