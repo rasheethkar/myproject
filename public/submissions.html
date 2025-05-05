@@ -92,6 +92,7 @@
             link.href = item.filePath;
             link.textContent = 'Download';
             link.className = 'file-link';
+            link.setAttribute('download', '');
             fileCell.appendChild(link);
           } else {
             fileCell.textContent = '-';
@@ -107,9 +108,3 @@
   </script>
 </body>
 </html>
-<!-- This HTML file is designed to display a list of submitted complaints in a table format. 
-     It fetches data from an API endpoint and dynamically populates the table with the complaint details. 
-     The table includes columns for ID, Name, Contact, Category, Description, File (with download link), and Timestamp. -->
-<!-- The JavaScript function `loadComplaints` handles the fetching and rendering of the data.
-     The table is styled with basic CSS for better readability. 
-     The file download link is only shown if a file path is available for the complaint. -->
